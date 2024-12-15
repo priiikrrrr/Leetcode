@@ -19,18 +19,22 @@ public:
             next[i] = max;
             if(max < height[i]) max = height[i];
         }
-
+        //storing the minimum value in an existing array(prev) hence optimising 
+        for(int i = 0 ; i < n ; i++){
+            prev[i] = min(prev[i], next[i]);
+        }
+/*
         //minimum of both array in sep array
         int mini[n];
         for(int i = 0 ; i <n ; i++){
             mini[i] = min(prev[i], next[i]);
         }
-
+*/
         //calculating volume of water
         int water = 0;
         for(int i = 0 ; i < n ; i++){
-            if(height[i] < mini[i]){
-                water += (mini[i] - height[i]);
+            if(height[i] < prev[i]){
+                water += (prev[i] - height[i]);
                  //agar walls ki height badi hai minimum of mini of both sep array se 
                 //then subtracting the both will give the amount of water the wall will hold b/w the 
                 //minimum of element and wall 
