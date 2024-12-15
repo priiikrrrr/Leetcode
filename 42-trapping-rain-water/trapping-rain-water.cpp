@@ -5,31 +5,21 @@ public:
         //find previous greatest elements array
         int prev[n];
         prev[0] =  -1;
-         int max = height[0];
+        int max = height[0];
         for(int i = 0 ; i < n ; i++){
             prev[i] = max;
             if(max < height[i]) max = height[i];
         }
+        //next greatest element using prev as next and minimum will also recide in the same array hence 
+        // we are now using just one array -> more optimized 
 
-        //find next greatest elements array
-        int next[n];
-        next[n-1] = -1;
+        prev[n-1] = -1;
         max = height[n-1];
-        for(int i = n-2 ; i >= 0 ; i--){
-            next[i] = max;
+        for(int i = n-2; i >= 0 ; i--){
+            if(max < prev[i]) prev[i] = max;
             if(max < height[i]) max = height[i];
-        }
-        //storing the minimum value in an existing array(prev) hence optimising 
-        for(int i = 0 ; i < n ; i++){
-            prev[i] = min(prev[i], next[i]);
-        }
-/*
-        //minimum of both array in sep array
-        int mini[n];
-        for(int i = 0 ; i <n ; i++){
-            mini[i] = min(prev[i], next[i]);
-        }
-*/
+        }    
+
         //calculating volume of water
         int water = 0;
         for(int i = 0 ; i < n ; i++){
