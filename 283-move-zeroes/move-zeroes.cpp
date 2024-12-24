@@ -1,19 +1,18 @@
 class Solution {
 public:
-//brute force 
+    // brute force
     void moveZeroes(vector<int>& arr) {
         int n = arr.size();
-        vector<int>v;
-        int numOfZee = 0;
-        for(int i = 0 ; i < n ; i++){
-            if(arr[i] != 0) v.push_back(arr[i]);
-            else numOfZee++;
+        int i = 0; // iterate on zeros
+        int j = 0; // iterate on non zeros
+
+        while (i < n && j < n) { //out of bound condition
+            if (arr[i] == 0 && arr[j] != 0){
+                if(j >i) swap(arr[i],arr[j]);
+                else j++;
+            }
+            else if (arr[i] != 0) i++;
+            else if (arr[j] == 0) j++;
         }
-        for(int i = 1; i <= numOfZee ; i++){
-            v.push_back(0);
-        }
-        for(int i = 0 ; i < n ; i++){
-            arr[i] = v[i];
-        }
-     }
+    }
 };
