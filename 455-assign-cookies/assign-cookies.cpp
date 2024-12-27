@@ -5,7 +5,7 @@ public:
         sort(s.begin(),s.end()); // 5 6 7 8 
 
         int count = 0;
-        int minimum = min(g.size(),s.size());
+        // int minimum = min(g.size(),s.size());
         // for(int i = 0 ; i < min(g.size(),s.size()) ; i++){
         //     if(s[i] >= g[i]) count++;
         // }
