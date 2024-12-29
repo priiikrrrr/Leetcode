@@ -15,7 +15,7 @@ public:
 
     //     return false;
 
-    //o(1)
+    //O(1)
     int root = sqrt(x);
     if(root*root == x) return true;
     else return false;
