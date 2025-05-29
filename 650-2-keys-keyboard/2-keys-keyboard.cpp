@@ -35,7 +35,7 @@ public:
         }
         */
         int count = 0;
-        while(n > 1){//O(sqrt(n))
+        while(n > 1){//O(sqrt(n)) ////O(logN)
             if(isPrime(n)){
                 count += n;//O(sqrt(n))
                 break;
