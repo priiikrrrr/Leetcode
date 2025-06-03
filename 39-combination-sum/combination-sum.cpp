@@ -1,23 +1,30 @@
 class Solution {
 public:
-    void combination(vector<vector<int>>& ans, vector<int> v,
-                        vector<int>& candidates, int target, int index) {
-        if (target == 0) {
-            ans.push_back(v);
+    vector<vector<int>>result;
+    void f(vector<int>& cand, int target,int index, vector<int>&subset){
+        // int orgTarget = target;
+        if(target == 0){
+            result.push_back(subset);
             return;
         }
-        if (target < 0)
-            return;
-        for (int i = index; i < candidates.size(); i++) {
-            v.push_back(candidates[i]);
-            combination(ans, v, candidates, target - candidates[i], i);
-            v.pop_back();
+        if(index == cand.size()) return;
+        //pick 
+        if(cand[index] <= target){
+            subset.push_back(cand[index]);
+            f(cand, target - cand[index], index, subset);
+            subset.pop_back();
+            // target = orgTarget;
         }
+        //not pick
+        int j = index + 1; //to avoid repeated sets, if the ele is same, we will skip making subset/combination from that ele
+        // while(j < cand.size() and cand[j] == cand[j-1]) j++;
+        f(cand,target,j,subset);
     }
-        vector<vector<int>> combinationSum(vector<int> & candidates,int target) {
-            vector<vector<int>> ans;
-            vector<int> v;
-            combination(ans,v, candidates, target, 0);
-            return ans;
-        }
+    vector<vector<int>> combinationSum(vector<int>& candidates, int target) {
+        sort(candidates.begin(), candidates.end());
+        vector<int>subset;
+        result.clear();
+        f(candidates,target,0, subset);
+        return result;
+    }
 };
