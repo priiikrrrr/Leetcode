@@ -3,6 +3,7 @@ public:
     vector<int> rearrangeArray(vector<int>& nums) {
         int n = nums.size();
         vector<int>ans;
+        if (nums.empty() || nums.size() == 1) return nums;
         // if(n <= 1) return nums;
         // if(n == 2){
         //     if(nums[0] < 0 && nums[1] > 0){
