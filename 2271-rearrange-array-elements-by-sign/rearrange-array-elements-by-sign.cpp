@@ -1,42 +1,13 @@
 class Solution {
 public:
     vector<int> rearrangeArray(vector<int>& nums) {
-        int n = nums.size();
+        if(nums.size()== 1 || nums.empty()) return nums;
         vector<int>ans;
-        if (nums.empty() || nums.size() == 1) return nums;
-        // if(n <= 1) return nums;
-        // if(n == 2){
-        //     if(nums[0] < 0 && nums[1] > 0){
-        //         // swap(nums[0],nums[1]);
-        //         ans.push_back(nums[1]);
-        //         ans.push_back(nums[0]);
-        //     }
-        // }
-        // int i = 0;
-        // int j = 0;
-        // if(n > 3){
-        //     if(nums[i] > 0){
-        //         ans.push_back(nums[i]);
-        //         if(nums[i+ 1] > 0)j++;
-        //         if(nums[j] > 0) j++;
-        //         else{
-        //             ans.push_back(nums[j]);
-        //         }
-        //         i++;
-        //         ans.push_back(nums[i]);
-        //     }
-        //     else{
-        //         //nums[i] < 0
-        //         i++;
-        //         if(nums[i] >0) ans.push_back(nums[i]);
-        //     }
-        // }
-        // return ans;
         vector<int>pos,neg;
         for(int num: nums){
             if(num >= 0) pos.push_back(num);
             else neg.push_back(num);
-        }
+            }
         int i = 0; 
         int j = 0;
         while(i < pos.size() && j < neg.size()){
@@ -48,3 +19,11 @@ public:
         return ans;
     }
 };
+
+//to think :: 
+/*
+what is needed - separation of arrays 
+what to repeat - alternate num 
+edge cases - empty arr, size 1, odd num (counter to this ques), 2 neg , 1 pos(or vice versa)(counter to the q)
+since the ques said equal num of neg and pos hence last two edge cases are nullified
+*/
