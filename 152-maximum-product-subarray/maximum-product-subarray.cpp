@@ -21,3 +21,6 @@ public:
         return maxProd;
     }
 };
+
+//brute forced O(N)Tc & o(1) Sc
+//optimized -> use kandane's algo
