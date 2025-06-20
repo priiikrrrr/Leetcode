@@ -8,25 +8,16 @@
  *     ListNode(int x, ListNode *next) : val(x), next(next) {}
  * };
  */
+ //solve in one pass by using slow and fast pointer tech
 class Solution {
 public:
-/*
-length of node traverse kro -> 0 to n-1
-for odd length -> (n/2)thn index -> middle 
-for even length -> (n/2)th -> right middle and (n/2 -1)th -> left middle 
-*/
     ListNode* middleNode(ListNode* head) {
-        int len = 0;
-        ListNode* temp = head;
-        while(temp!= NULL){
-            len++;
-            temp = temp->next;
+        ListNode* slow = head;
+        ListNode* fast = head;
+        while((fast != NULL) && (fast->next != NULL)){
+            slow = slow->next;
+            fast = fast->next->next;
         }
-        int midIndex = len/2;
-        ListNode* mid = head;
-        for(int i = 1 ; i<= midIndex ;i++){
-            mid = mid->next;
-        }
-        return mid;
+        return slow;
     }
 };
