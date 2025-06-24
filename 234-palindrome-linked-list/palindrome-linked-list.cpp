@@ -11,42 +11,21 @@
 class Solution {
 public:
     bool isPalindrome(ListNode* head) {
-        ListNode*curr = head;
-        vector<int>LinkedList;
+        ListNode* curr = head; //temporary node at head
+        vector<int>list; //making a vector/array to store node's value 
+
         while(curr != NULL){
-            LinkedList.push_back(curr->val);
+            list.push_back(curr->val);
             curr = curr->next;
         }
-        // bool flag = false;
-        int slow = 0;
-        int fast = LinkedList.size() - 1;
-        while(slow < fast){
-            if(LinkedList[slow] != LinkedList[fast])return false;
-            fast--;
-            slow++;
+        int i = 0 ; 
+        int j = list.size()-1;
+        //traversing the array using 2 pointer approach the check the values of node innit is similar acc to plaindrome or not 
+        while(i < j){
+            if(list[i] != list[j])return false;
+                i++;
+                j--;
         }
-        return true;
-        // for(int i = (LinkedList.size()-1) ; i >= 0 ; i--){
-        //     if(LinkedList[i] != LinkedList[slow]) break;
-        //     else{
-        //         slow++;
-        //         flag = true;
-        //     }
-            
-        // }
-        // if(flag == true)return true;
-        // else return false;
-
-
-
-        // ListNode*prev = NULL;
-        // ListNode*nextNode = NULL;
-        // while(curr != NULL){
-        //     nextNode  = curr->next; //storing value in next nodde
-        //     curr->next = prev; //reversing the pointer
-        //     prev = curr; //shifting forward after reversal
-        //     curr = nextNode;
-        // }
-
+            return true;
     }
 };
