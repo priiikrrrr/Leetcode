@@ -10,6 +10,9 @@ class Solution {
 public:
     bool hasCycle(ListNode *head) {
        /*
+        here we are replacing value of ll which isnot reliable since we are 
+        assigning the bool values to int, and its against the q as well 
+       
         ListNode*temp = head;
         // ListNode*end = NULL;
         // int len = 0;
@@ -25,6 +28,7 @@ public:
         }
         return false;
        */
+//better approach is to use floyd tortoise;hare algo // fast slow algo 
        if(head == NULL || head->next == NULL) return false;
        ListNode* temp1 = head; 
        ListNode* temp2 = head;
