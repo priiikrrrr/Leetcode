@@ -22,7 +22,8 @@ public:
         // else if(idx == 1)return temp = temp->next;
         if(size == idx)return head->next;
         temp = head;
-        for(int i = 0 ; i < (size - idx -1) ; i++)temp = temp->next;
+        // for(int i = 0 ; i < (size - idx -1) ; i++)temp = temp->next;
+        for(int i = 1 ; i < size - idx ; i++)temp = temp->next;
         temp->next = temp->next->next;
         return head;
     }
