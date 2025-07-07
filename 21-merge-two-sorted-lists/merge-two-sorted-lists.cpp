@@ -10,32 +10,26 @@
  */
 class Solution {
 public:
-    ListNode* mergeTwoLists(ListNode* list1, ListNode* list2) {
-        //with O(m+n) length;
-        ListNode* ta = list1;
-        ListNode* tb = list2;
+    ListNode* mergeTwoLists(ListNode* ta, ListNode* tb) {
+        //SC O(1) - optimized 
+        // if(list1 == NULL || list2 == NULL)  return list1;
+        // if(list1->next == NULL || list2->next == NULL) return list2;
         ListNode* dummy = new ListNode(100);
         ListNode* tc = dummy;
+
         while(ta != NULL && tb != NULL){
-            if(ta->val <= tb->val){
-                ListNode* t = new ListNode(ta->val);
-                tc->next = t;
-                tc = t;
+            if(ta->val <=  tb->val){
+                tc->next = ta;
                 ta = ta->next;
+                tc = tc->next;
             }else{
-                ListNode* t = new ListNode(tb->val);
-                tc->next = t;
-                tc = t;
+                tc->next = tb;
                 tb = tb->next;
+                tc = tc->next;
             }
         }
-        if(ta == NULL) {
-            tc->next = tb;
-        } 
-        else // tb == NULL
-        {
-        tc->next = ta;
-        } 
+        if(ta == NULL)tc->next = tb;
+        else tc->next = ta;
         return dummy->next;
     }
 };
