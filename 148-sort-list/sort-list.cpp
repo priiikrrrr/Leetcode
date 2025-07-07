@@ -30,6 +30,7 @@ public:
         return dummy->next;
     }
     ListNode* sortList(ListNode* head) {
+        //base case for recursion
         if(head ==  NULL || head->next == NULL)return head;
         ListNode* slow = head;
         ListNode* fast = head;
