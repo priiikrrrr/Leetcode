@@ -10,32 +10,42 @@
  */
 class Solution {
 public:
-    ListNode* mergeList(ListNode* L1, ListNode* L2) {
-        if(L1 == NULL)return L2;
-        if(L2 == NULL)return L1;
-
-        if(L1->val <= L2->val){
-            L1->next = mergeList(L1->next, L2);
-            return L1;
+//sc O(1)
+    ListNode* merge(ListNode* ta, ListNode* tb){
+        ListNode* dummy = new ListNode(1000);
+        ListNode* tc = dummy;
+        while(ta != NULL && tb != NULL){
+            if(ta->val <= tb->val){
+                tc->next = ta;
+                ta = ta->next;
+                tc = tc->next;
+            }else{
+                tc->next = tb;
+                tb = tb->next;
+                tc = tc->next;
+            }
         }
-        L2->next = mergeList(L1, L2->next);
-            return L2;
+        if(ta == NULL)tc->next = tb;
+        else tc->next = ta;
+        return dummy->next;
     }
     ListNode* sortList(ListNode* head) {
-      if(head == NULL || head->next == NULL)return head;
-      ListNode* slow = head;
-      ListNode* fast = head;
-      fast =  fast->next;
-      while(fast != NULL && fast->next != NULL){
-        slow = slow->next;
-        fast = fast->next->next;
-      }
-      ListNode* newHead = slow->next;
-      slow->next = NULL;
-
-      ListNode* L1 = sortList(head);
-      ListNode* L2 = sortList(newHead);
-
-      return mergeList(L1,L2);
+        if(head ==  NULL || head->next == NULL)return head;
+        ListNode* slow = head;
+        ListNode* fast = head;
+        //for even length check (fast != NULL && fast->next != NULL)
+        //for odd length i.e to FIND LEFT MIDDLE check (fast->next != NULL && fast->next->next != NULL)
+        while(fast->next != NULL && fast->next->next != NULL){
+            slow = slow->next;
+            fast = fast->next->next;//for even length
+        }
+        //now SLOW is at left middle
+        ListNode* ta = head;
+        ListNode* tb = slow->next;
+        slow->next = NULL;
+        ta = sortList(ta);
+        tb = sortList(tb);
+        ListNode* tc = merge(ta,tb);
+        return tc;
     }
 };
