@@ -39,6 +39,7 @@ public:
         if (lists.size() == 0)
             return NULL;
         while (lists.size() > 1) {
+            //this one has a space of O(K)
             ListNode* ta = lists[0];
             lists.erase(lists.begin());//pop- front
             ListNode* tb = lists[0];
