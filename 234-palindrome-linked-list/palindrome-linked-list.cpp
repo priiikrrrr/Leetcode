@@ -10,22 +10,37 @@
  */
 class Solution {
 public:
+    ListNode* reverseList(ListNode* head){
+        ListNode* prev = NULL;
+        ListNode* curr = head;
+        ListNode* Next = head;
+        while(curr){
+            Next = curr->next;
+            curr->next = prev;
+            prev = curr;
+            curr = Next;
+        }
+        return prev;
+    }
     bool isPalindrome(ListNode* head) {
-        ListNode* curr = head; //temporary node at head
-        vector<int>list; //making a vector/array to store node's value 
+//if first and second half of list are reverse of each other then palind
+        ListNode* slow = head;
+        ListNode* fast = head;
+        while(fast->next != NULL && fast->next->next != NULL){
+            slow = slow->next;
+            fast = fast->next->next;
+        }
+        //slow is at leftmiddle// i.e for odd = middle
+        ListNode* right = reverseList(slow->next);
+        ListNode* a = head;
+        ListNode* b = right;
 
-        while(curr != NULL){
-            list.push_back(curr->val);
-            curr = curr->next;
+        while(b){
+            if(a->val != b->val)return false;
+            a = a->next;
+            b = b->next;
         }
-        int i = 0 ; 
-        int j = list.size()-1;
-        //traversing the array using 2 pointer approach the check the values of node innit is similar acc to plaindrome or not 
-        while(i < j){
-            if(list[i] != list[j])return false;
-                i++;
-                j--;
-        }
-            return true;
+        return true;
+
     }
 };
