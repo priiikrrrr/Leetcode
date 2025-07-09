@@ -1,17 +1,3 @@
-/**
- * Definition for singly-linked list.
- * struct ListNode {
- *     int val;
- *     ListNode *next;
- *     ListNode() : val(0), next(nullptr) {}
- *     ListNode(int x) : val(x), next(nullptr) {}
- *     ListNode(int x, ListNode *next) : val(x), next(next) {}
- * };
- */
-
-// REFER LEETCODE 21 -> pick up two elements from the last of the array
-// merge it using that concept , return it and push_back again in the existing
-// array
 class Solution {
 public:
     ListNode* merge(ListNode* ta, ListNode* tb) {
@@ -39,7 +25,7 @@ public:
         if (lists.size() == 0)
             return NULL;
         while (lists.size() > 1) {
-            //this one has a space of O(K)
+            //this one has a space of O(1)
             ListNode* ta = lists[0];
             lists.erase(lists.begin());//pop- front
             ListNode* tb = lists[0];
