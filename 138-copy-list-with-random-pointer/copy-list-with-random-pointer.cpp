@@ -14,19 +14,13 @@ public:
 };
 */
 
-/*
-steps - 
-    1. Construct a deep copy(refer palind... question)without random connection.
-    2. Create alternate connections(refer merge question).
-    3. Assign random pointers of duplicate
-    4. Separate the lists i.e removing the connection(refer odd/even LL && partition LL)
-*/
 class Solution {
 public:
     Node* copyRandomList(Node* head) {
         Node* dummy = new Node(0);
         Node* tc = dummy;
         Node* temp = head;
+        
         while(temp){
             Node* a = new Node(temp->val);
             tc->next = a;
