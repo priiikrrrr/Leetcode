@@ -1,15 +1,4 @@
-/**
- * Definition for singly-linked list.
- * struct ListNode {
- *     int val;
- *     ListNode *next;
- *     ListNode() : val(0), next(nullptr) {}
- *     ListNode(int x) : val(x), next(nullptr) {}
- *     ListNode(int x, ListNode *next) : val(x), next(next) {}
- * };
- */
-
- //hints : use palindrome concept , partitionLL/merging concept , merging LL concept
+// palindrome concept , partitionLL/merging concept , merging LL concept
 class Solution {
 public:
     ListNode* reverseList(ListNode* head){
@@ -31,17 +20,13 @@ public:
             slow = slow->next;
             fast = fast->next->next;
         }
-        //slow is at leftmiddle// i.e for odd = middle
         ListNode* b = reverseList(slow->next);
         ListNode* a = head;
-        slow->next = NULL; //for breaking LL
-        //merge a & b alternatively
-    
+        slow->next = NULL;
         ListNode* dummy = new ListNode(0);
         ListNode* tc = dummy;
         ListNode* ta = a;
         ListNode* tb = b;
-
         while(ta != NULL && tb != NULL){
             tc->next = ta;
             ta = ta->next;
@@ -49,7 +34,6 @@ public:
             tc->next = tb;
             tb = tb->next;
             tc = tc->next;
-
         }
         tc->next = ta;
         head =  tc->next;
