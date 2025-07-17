@@ -20,7 +20,7 @@ SC O(1), TC O(n)
         return v[v.size() - 1];
     }
     
-    int getMin() {//O(1)
+    int getMin() {//O(n)
         int mn = v[0];
         for(int i = 1 ; i < v.size() ; i++){
             mn = min(mn, v[i]);
