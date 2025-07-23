@@ -4,26 +4,15 @@ public:
         if(root == NULL)return 0;
         return 1+ max(levels(root->left), levels(root->right));
     }
-    void nthdisplayTree(TreeNode* root, int curr , int reqLevel , vector<int>&final){
-        if(root == NULL)return;                                       //base case
-        if(curr == reqLevel){                                         //work optimized
-            final[curr] = root->val;
-            return;
-        }             
-        nthdisplayTree(root->left, curr+1 , reqLevel , final);        //call 1
-        nthdisplayTree(root->right , curr+1 , reqLevel, final);       //call2         
-    } 
-
-    void order(TreeNode* root, vector<int>&final){
-        int n = final.size();
-        for(int i = 0 ; i < n ; i++){
-            nthdisplayTree(root, 0 , i , final);
-        }
+    void preOrder(TreeNode* root ,vector<int>&final , int level){
+        if(root == NULL)return;
+        final[level] = root->val;
+        preOrder(root->left, final, level+1);
+        preOrder(root->right, final, level+1);
     }
-
     vector<int> rightSideView(TreeNode* root) {
         vector<int>final(levels(root),0);
-        order(root, final);
+        preOrder(root, final ,0);
         return final;
     }
 };
