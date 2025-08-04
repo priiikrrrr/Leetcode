@@ -1,5 +1,6 @@
 class Solution {
 public:
+//iterative method 
     vector<TreeNode*> preorderTraversal(TreeNode* root) {
         //interative
         vector<TreeNode*> ans;
