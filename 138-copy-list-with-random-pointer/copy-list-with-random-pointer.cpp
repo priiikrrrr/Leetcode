@@ -17,10 +17,14 @@ public:
 class Solution {
 public:
     Node* copyRandomList(Node* head) {
-        Node* dummy = new Node(0);
-        Node* tc = dummy;
-        Node* temp = head;
+        Node* dummy = new Node(0); //create a new node
+        Node* tc = dummy; // assign a variable to that node
+        Node* temp = head; //assign a variable to head node
         
+/*
+while temp reaches NULL, fill the values of head, in a new node assign tc to it
+*/
+
         while(temp){
             Node* a = new Node(temp->val);
             tc->next = a;
