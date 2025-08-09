@@ -1,20 +1,21 @@
+struct customcomp{
+    bool operator()(pair<int,int> &a, pair<int,int> &b) {
+        return a.second < b.second; 
+    }    
+};
 class Solution {
 public:
     vector<int> topKFrequent(vector<int>& nums, int k) {
-        vector<int>answer;
-      unordered_map<int,int>mp;
-      for(int  i = 0 ; i < nums.size(); i++){
-        mp[nums[i]]++;
-      }
-    priority_queue<pair<int,int>,vector<pair<int,int>>,greater<pair<int,int>>>minheap;
-      for(auto i=mp.begin(); i != mp.end(); i++){
-            minheap.push({i->second,i->first});
-            if(minheap.size() > k) minheap.pop();
-      }
-      for(int i = 0 ; i < k ; i++){
-        answer.push_back(minheap.top().second);
-        minheap.pop();
-      }
-      return answer;
+        vector<int>ans;
+        priority_queue<pair<int,int>, vector<pair<int,int>>, customcomp> pq;
+        unordered_map<int,int>mp;
+        for(int i : nums)mp[i]++;
+        for(auto &i : mp)pq.push({i.first, i.second});
+        while(k){
+            ans.push_back(pq.top().first);
+            pq.pop();
+            k--;
+        }
+        return ans;
     }
 };
