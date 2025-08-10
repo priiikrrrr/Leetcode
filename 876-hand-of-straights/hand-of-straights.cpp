@@ -6,7 +6,7 @@ public:
         
         for (int i : nums)mp[i]++;
 
-        for (auto it = mp.begin(); it != mp.end(); ++it) {
+        for (auto it = mp.begin(); it != mp.end(); it++) {
             int i = it->first;  //key : number
             int j = it->second; //freq of number
             if (j > 0) {        //when freq > 0
