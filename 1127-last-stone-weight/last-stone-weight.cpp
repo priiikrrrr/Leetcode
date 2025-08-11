@@ -1,29 +1,20 @@
 class Solution {
 public:
-    int lastStoneWeight(vector<int>& arr) {
-        priority_queue<int>q;//max heap
-        for(int i : arr) q.push(i);
+    int lastStoneWeight(vector<int>& stones) {
+        priority_queue<int>pq;//max-heap
+        for(int i : stones)pq.push(i);
 
-        while(q.size() > 1){
-            int x = q.top();
-            q.pop();
-            int y = q.top();
-            q.pop();
-            // if(x == y)q.pop();
-
+        while(pq.size() > 1){
+            int x = pq.top();
+            pq.pop();
+            int y = pq.top();
+            pq.pop();
             if(x != y){
                 y = x - y;
-                q.push(y); 
+                pq.push(y);
             }
         }
-        // if(arr.size() == 0) return 0; rookie mistake
-        if(q.empty())return 0;
-        else return q.top();
+        if(!pq.empty())return pq.top();
+        else return 0;
     }
 };
-
-
-
-        //arr[i] = weight of stone 
-        //arr = stones 
-        // priority_queue<int,vector<int>,greater<int>>pq;//min heap
