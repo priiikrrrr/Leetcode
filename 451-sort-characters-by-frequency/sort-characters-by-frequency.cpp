@@ -4,6 +4,9 @@ struct customcomp{ //overloading max heap for freq, based seggregation
     }    
 };
 
+
+// TC : O(NlogN);
+// SC : O(N)
 class Solution {
 public:
     string frequencySort(string s) {
