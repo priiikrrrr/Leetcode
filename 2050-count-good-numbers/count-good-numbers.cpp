@@ -14,7 +14,7 @@ public:
         long long E = (n+1)/2;/*rookie*/
         long long O = n/2;
         // mypow(E, O);
-        long long ans = (mypow(5,E) % MOD*mypow(4,O) % MOD)% MOD;
-        return (int)ans;
+        return (int)(mypow(5,E) % MOD*mypow(4,O) % MOD)% MOD;
+        // return (int)ans;
     }
 };
