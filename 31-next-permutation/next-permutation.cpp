@@ -1,44 +1,33 @@
 class Solution {
 public:
-    void reversee(vector<int>& nums,int i , int j){
-        while(i < j ){
-            int temp = nums[i];
-            nums[i] = nums[j];
-            nums[j] = temp;
-            i++;
-            j--;
-        }
-        return;
-    }
     void nextPermutation(vector<int>& nums) {
-        int idx = -1;
-        for(int i = nums.size()-2 ; i >= 0 ; i--){
-            //finding pivot
-            if(nums.at(i) < nums.at(i+1)){
-                idx = i; 
+        // int i = nums[nums.length() - 1];
+        // int j = nums[nums.length() - 2];
+
+        // int j = -1;
+        int bp = -1;
+        // finding the break point
+        for (int i = nums.size() - 2; i >= 0; i--) {
+            if (nums[i] < nums[i + 1]) {
+                bp = i;
                 break;
             }
         }
-        if(idx == -1){ //if no next permutation
-            //in built -> reverse(nums.begin(), nums.end());
-            reversee(nums, 0 , nums.size() -1);
+        // if no breakpoint, simply aesc the order
+        if (bp == -1) {
+            reverse(nums.begin(), nums.end());
             return;
         }
-        //sorting/reverse elements after pivot
-        //to reverse i to j --> use reverse(nums.begin() + i, nums.begin() + j + 1)
-        reverse(nums.begin() + (idx + 1), nums.end());
-        //used nums.end() here because we have to reverse till the end of vector
-        //find element just greater than pivot 
-        int j = -1;
-        for(int i = idx+1 ; i <nums.size() ; i++){
-            if(nums[i] > nums[idx]){
-                j = i;
+
+        // if bp found, sort the ele left, on the left of bp
+        reverse(nums.begin() + (bp + 1), nums.end());
+        
+        // Find the smallest element greater than nums[bp] from the end & swap
+        for (int i = bp + 1; i < nums.size(); i++) {
+            if (nums[i] > nums[bp]) {
+                swap(nums[bp], nums[i]);
                 break;
             }
         }
-        //swap idx and j
-        int temp = nums[idx];
-        nums[idx] = nums[j];
-        nums[j] = temp;
     }
 };
