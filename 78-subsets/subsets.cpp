@@ -1,19 +1,24 @@
 class Solution {
 public:
-void helper(vector<int>&nums , vector<vector<int>>&res , vector<int>&curr, int idx){
-    if(idx == nums.size()){
-        res.push_back(curr);
+    void solve(vector<int> nums,vector<int>ans,vector<vector<int>>&res){
+        if(nums.size() == 0){
+            res.push_back(ans);
+            return;
+        }
+        vector<int> op1 = ans;
+        vector<int> op2 = ans;
+
+        op2.push_back(nums[0]);
+        //not doing anything in op1 since , op1 is for subset where we are not talking the following ele 
+        nums.erase(nums.begin());
+        solve(nums, op1, res);
+        solve(nums, op2, res);
         return;
     }
-    curr.push_back(nums[idx]);
-    helper(nums, res, curr, idx + 1);
-    curr.pop_back();
-    helper(nums, res, curr, idx + 1);
-}
     vector<vector<int>> subsets(vector<int>& nums) {
+        vector<int>ans;
         vector<vector<int>>res;
-        vector<int>curr;
-        helper(nums, res, curr, 0);
+        solve(nums, ans, res);
         return res;
     }
 };
