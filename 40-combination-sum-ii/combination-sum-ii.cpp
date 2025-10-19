@@ -1,30 +1,25 @@
 class Solution {
 public:
-    vector<vector<int>>result;
-    void f(vector<int>& cand, int target,int index, vector<int>&subset){
-        // int orgTarget = target;
+    void solve(vector<int>& candidates,vector<int>&temp,vector<vector<int>>&ans, int target, int id){
         if(target == 0){
-            result.push_back(subset);
+            ans.push_back(temp);
             return;
         }
-        if(index == cand.size()) return;
-        //pick 
-        if(cand[index] <= target){
-            subset.push_back(cand[index]);
-            f(cand, target - cand[index], index+1, subset);
-            subset.pop_back();
-            // target = orgTarget;
+        // if(target < 0 || id >= candidates.size())return;
+        for(int i = id ; i < candidates.size() ; i++){
+            if(i > id && candidates[i] == candidates[i-1])continue;
+
+            if(candidates[i] > target)break;
+            temp.push_back(candidates[i]);
+            solve(candidates, temp, ans, target - candidates[i], i + 1);
+            temp.pop_back();
         }
-        //not pick
-        int j = index + 1; //to avoid repeated sets, if the ele is same, we will skip making subset/combination from that ele
-        while(j < cand.size() and cand[j] == cand[j-1]) j++;
-        f(cand,target,j,subset);
     }
     vector<vector<int>> combinationSum2(vector<int>& candidates, int target) {
+        vector<int>temp;
+        vector<vector<int>>ans;
         sort(candidates.begin(), candidates.end());
-        vector<int>subset;
-        result.clear();
-        f(candidates,target,0, subset);
-        return result;
+        solve(candidates, temp, ans, target, 0);
+        return ans;
     }
 };
