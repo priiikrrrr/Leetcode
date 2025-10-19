@@ -1,16 +1,27 @@
 class Solution {
 public:
-void Parenthesis(string empty,vector<string>& answer,int pairs, int open, int close){
-    if(close == pairs){
-        answer.push_back(empty);
-        return;
+    void solve(int n , string s , int open, int close, vector<string>&ans){
+        if(open == 0 & close == 0){
+            ans.push_back(s);
+            return;
+        }
+            string op1 = s;
+            string op2  = s;
+            if(open > 0){
+                op1.push_back('(');
+                solve(n, op1, open-1 , close, ans);
+
+            }
+            if(close > open){
+                op2.push_back(')');
+                solve(n , op2, open, close-1, ans);
+            }
     }
-    if(open <  pairs) Parenthesis(empty + '(',answer, pairs , open+1, close);
-    if(close < open) Parenthesis(empty + ')',answer, pairs , open, close + 1);
-}
     vector<string> generateParenthesis(int n) {
-        vector<string>answer;
-        Parenthesis("", answer,n, 0, 0);
-        return answer;
+        vector<string>ans;
+        int open = n ; 
+        int close = n;
+        solve(n , "" , open , close, ans);
+        return ans;
     }
 };
