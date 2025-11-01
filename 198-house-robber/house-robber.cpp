@@ -38,6 +38,7 @@ public:
     int rob(vector<int>& nums) {
         dp.clear();//garbage value if any
         dp.resize(105, -1);//resizing dp via looking at constraints doing so, will help us less thinking of ki size - 1 lein ya size/2 lein, jitna constraint given h uske aas paas ka number lelo , if n wouldve been 10^3 i would ve took 10^3 + 5 as the size of dp 
-        return solveViaTD(nums, 0);
+        // return solveViaTD(nums, 0);
+        return solveViaBU(nums);
     }
 };
