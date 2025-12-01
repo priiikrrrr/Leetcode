@@ -1,29 +1,27 @@
 class Solution {
 public:
     bool isAnagram(string s, string t) {
-        //int -> frequency 
-        //char is string's char
-        if(s.length() != t.length())return false;
-        unordered_map<char,int>m1; 
-        unordered_map<char,int>m2;
+        unordered_map<char , int> mp;
+        unordered_map<char , int> sp;
+        if(s.length()!= t.length())return false;
         for(int i = 0 ; i < s.length() ; i++){
-            m1[s[i]]++;
-        } 
-        for(int i = 0 ; i < t.length() ; i++){
-            m2[t[i]]++;
+            mp[s[i]]++;
         }
-        //map1  k har ele p gye
-        for(auto x : m1){
-            //key aur value store ki
-            char ch1 = x.first;
-            int frq1 = x.second;
-            //map2 main respective key dhundhi
-            if(m1.find(ch1) != m2.end()){
-                //& then compare ki 
-                int frq2 = m2[ch1];//gives the value of key, i.e inc of frq
-                if(frq1 != frq2)return false;
+        for(int i = 0 ; i < t.length() ; i++){
+            sp[t[i]]++;
+        }
+
+        for(auto i : mp){
+            char ch = i.first;
+            int frq = i.second;
+
+            if(sp.find(ch) != sp.end()){
+                int frq1 = sp[ch];// finding the frequency of the character ch , if we find it in string t.
+                //and now if the freq of that certain char found in t & s matches we return true, else false;
+                if(frq1 != frq)return false;
+            }else{
+                return false;
             }
-            else return false;
         }
         return true;
     }
