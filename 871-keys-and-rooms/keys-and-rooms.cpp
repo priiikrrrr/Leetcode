@@ -1,20 +1,20 @@
 class Solution {
 public:
-    bool canVisitAllRooms(vector<vector<int>>& rooms) {
-        unordered_set<int>st; //to store visited rooms
-        queue<int>q;
-        q.push(0);
-        st.insert(0);
-        while(!q.empty()){
-            int curr = q.front();
-            q.pop();
-            for(int neigh : rooms[curr]){ //0th room mein jo bhi keys given hai
-                if(st.count(neigh) == 0){//agar wo key visited nhi hai
-                    q.push(neigh);//save in q
-                    st.insert(neigh);//mark visited
-                }
+    void dfs(vector<vector<int>>& rooms,vector<int>&visited, int i){
+        visited[i] = 1;
+        for(auto neighbor : rooms[i]){
+            if(visited[neighbor] == 0){
+                dfs(rooms, visited, neighbor);
             }
         }
-        return st.size() == rooms.size();
+    }
+
+    bool canVisitAllRooms(vector<vector<int>>& rooms) {
+        int n = rooms.size();
+        vector<int>visited(n , 0);
+        dfs(rooms, visited, 0);
+        for(int i = 0 ; i < n ; i++){
+            if(visited[i] == 0)return false;
+        }return true;
     }
 };
