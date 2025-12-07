@@ -1,20 +1,17 @@
 class Solution {
 public:
     int maxArea(vector<int>& height) {
-        int length = height.size();
-        int maxWater = -1;
-        int i = 0; 
-        int j = length -1;
-
-        //water hold = width * gap == min(arr[i], arr[j]) *(j-i) 
+        int i = 0 ; 
+        int j = height.size() - 1;
+        int maxarea = -1;
         while(i < j){
-            int gap = j - i;
-            int width = min(height[i],height[j]);
-            int area = width*gap;
-            maxWater = max(maxWater,area);
-            if(height[i] <= height[j]) i++;
+            //area of a rectangle is = length * breadth
+            int breadth = j - i;
+            int length = min(height[i], height[j]);
+            maxarea = max(maxarea, breadth*length);
+            if( height[i] <= height[j] )i++;
             else j--;
         }
-        return maxWater;
+        return maxarea;
     }
 };
