@@ -1,14 +1,14 @@
 class Solution {
 public:
     vector<int> twoSum(vector<int>& numbers, int target) {
-        int i = 0;
+        if(numbers.size() < 2)return {};
+        int i = 0 ; 
         int j = numbers.size() - 1;
-        while (i < j) {
-            int found= numbers[i] + numbers[j];
-
-            if(found == target)return {i+ 1, j +1};
-            else if(found > target)j--;
-            else i++;
+        while( i < j ){
+            int sum = numbers[i] + numbers[j];
+            if(sum > target)j--;
+            else if(sum < target)i++;
+            else return {i + 1, j +1};
         }
         return {-1, -1};
     }
