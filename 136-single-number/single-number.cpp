@@ -1,18 +1,14 @@
 class Solution {
 public:
     int singleNumber(vector<int>& nums) {
-        int n = nums.size();
-        for(int i = 0 ; i < n ; i++){
-            bool flag = false ; 
-            for(int j = 0 ; j < n ; j++){
-                if(j == i) continue;
-                if(nums[i] == nums[j]){
-                    flag = true;
-                    break;
-                }
-            }
-            if(flag == false) return nums[i];
+        int ans = 0;
+        if(nums.size() == 1)return nums[0];
+        unordered_map<int, int>mp;
+        for(int &i : nums)mp[i]++;
+        for(auto j : mp){
+            int frq = j.second;
+            if(frq == 1)ans = j.first;
         }
-        return 0;
+        return ans;
     }
 };
