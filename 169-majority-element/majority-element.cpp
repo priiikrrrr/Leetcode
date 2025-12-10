@@ -2,12 +2,13 @@ class Solution {
 public:
     int majorityElement(vector<int>& nums) {
         int n = nums.size();
-        // if n is even -> n/2 times sey zyaada jo aara h wo nikaalna hai 
-
-        //brute force use count variable -> O(n^2)
-        //more optimised ->
-
-        sort(nums.begin(), nums.end());
-        return nums[(n/2)];
+        unordered_map<int,int>mp;
+        int ans = 0;
+        for(auto &i : nums)mp[i]++;
+        for(auto j : mp){
+            int frq = j.second;
+            if(frq > (n/2))ans = j.first;
+        }
+        return ans;
     }
 };
