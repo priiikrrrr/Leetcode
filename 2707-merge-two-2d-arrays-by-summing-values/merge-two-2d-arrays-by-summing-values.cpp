@@ -5,31 +5,35 @@ public:
         int m = nums1.size();
         int n = nums2.size();
 
-        unordered_map<int,int>mp;
         vector<vector<int>>ans;
+        int i = 0;
+        int j = 0;
 
-        //extracting the values and storing in the map
-        for(int i = 0 ; i < m ; i++){
-            int id = nums1[i][0];
-            int value = nums1[i][1];
-
-            mp[id] += value;
+        while(i < m && j < n){
+            if(nums1[i][0] < nums2[j][0]){
+                ans.push_back(nums1[i]);
+                i++;
+            }
+            else if(nums1[i][0] > nums2[j][0]){
+                ans.push_back(nums2[j]);
+                j++;
+            }
+            else{
+                ans.push_back({nums1[i][0], nums1[i][1]+ nums2[j][1]});
+                i++;
+                j++;
+            }
         }
 
-        for(int i = 0 ; i < n ; i++){
-            int id = nums2[i][0];
-            int value = nums2[i][1];
-
-            mp[id] += value;
+        //if one of the loop ends
+        while(i < m){
+            ans.push_back(nums1[i]);
+            i++;
         }
-
-        for(auto &it : mp){
-            int key = it.first;
-            int val = it.second;
-
-            ans.push_back({key,val});
+        while(j < n){
+            ans.push_back(nums2[j]);
+            j++;
         }
-        sort(ans.begin(), ans.end());
         return ans;
     }
 };
