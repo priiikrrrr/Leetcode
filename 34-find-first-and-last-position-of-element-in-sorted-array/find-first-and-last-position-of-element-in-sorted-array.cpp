@@ -1,52 +1,40 @@
 class Solution {
 public:
-    vector<int> searchRange(vector<int>& v, int target) {
-    vector<int>finalAns;
-    int firstOccurence = -1;
-    int n = v.size();
-    int low = 0;
-    int high = n - 1;
-
-    while (low <= high)
-    {
-        int mid = low + ((high - low) / 2); // OR (low + high)/2
-
-        if (v.at(mid) == target)
-        {
-            if(mid == 0 || v.at(mid-1) != target){
-    
-                firstOccurence = mid;
-                break;
+    int leftfind(vector<int>&nums, int target , int n){
+        int l = 0;
+        int h = n - 1;
+        int left = -1;
+        while(l <= h){
+            int mid = l +( (h - l) >> 1);
+            if(nums[mid] == target){
+                left = mid;
+                h = mid - 1;
             }
-            else{  //arr[mid-1] = x i.e now checking previous elements
-                high = mid - 1;
-            }
+            else if(nums[mid] < target)  l = mid + 1;
+            else h = mid - 1;
         }
-        else if (v.at(mid) < target) low = mid + 1;
-        else high = mid - 1;        
+        return left;
+    }
+    int rightfind(vector<int>&nums, int target , int n){
+        int l = 0;
+        int h = n - 1;
+        int right = -1;
+        while(l <= h){
+            int mid = l + ((h - l) >> 1);
+            if(nums[mid] == target){
+                right = mid;
+                l = mid + 1;
+            }
+            else if(nums[mid] < target) l = mid + 1;
+            else h = mid - 1;
+        }
+        return right;
     }
 
-    int lastoccurence = -1;
-    low = 0;
-    high = n - 1;
-    while(low <= high){
-        int mid = low + ((high - low) / 2);
-        if(v.at(mid) == target){
-            if(mid == n - 1 || v.at(mid+1) != target){
-                lastoccurence = mid;
-                break;
-            }
-            else{
-                low = mid+1;
-            }
-        }
-        else if(v.at(mid) < target) low = mid +1;
-        else high = mid - 1;
+    vector<int> searchRange(vector<int>& nums, int target) {
+        int n = nums.size();
+        int leftO = leftfind(nums, target, n);
+        int rightO = rightfind(nums, target, n);
+        return {leftO, rightO};
     }
-        finalAns.push_back(firstOccurence);
-        finalAns.push_back(lastoccurence);
-
-    return finalAns;
-    
-}
 };
