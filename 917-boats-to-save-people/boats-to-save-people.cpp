@@ -1,23 +1,31 @@
 class Solution {
 public:
     int numRescueBoats(vector<int>& people, int limit) {
+        // int count = 0;
+        // int sum = 0;
+        // for (int i = 0; i < people.size() ; i++) {
+        //     if(sum <= limit)sum += people[i];
+        // }
+        // return count;
+
+//non desc array
         sort(people.begin(), people.end());
-        int i = 0;
-        int j = people.size() -1;
-        int boatused = 0;
+        
+        int i = 0 ; int j = people.size() - 1;
+        int boats = 0;
         while(i <= j){
-            if(people[i] + people[j] <= limit){
-                boatused++;
+            int sum = people[i] + people[j];
+            if(sum <= limit){
+                boats++;
                 i++;
                 j--;
             }else{
-                boatused++;
+                //limit crossed
+                boats++;
                 j--;
-//moving the heavy weight which couldnt be pair 
-//up , hence making the j have an individual boat for themselves 
-//since the array is sorted, the heaviest at the last will not pair up with other people as well
-            }
+
+            } 
         }
-        return boatused;
+        return boats;
     }
 };
