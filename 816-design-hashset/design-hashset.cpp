@@ -1,20 +1,32 @@
 class MyHashSet {
 public:
-    vector<int>v;
+    int m;
+    vector<list<int>>buck;
+    int getIdx (int key){
+        return key%m ; //to retrive index
+    }
     MyHashSet() {
-        v.resize(1000001, false);
+        m = 15000;
+        buck = vector<list<int>>(m, list<int>{});
     }
     
     void add(int key) {
-        v[key] = true;
+        int idx = getIdx(key);
+        auto it = find(buck[idx].begin() , buck[idx].end(), key);
+        if(it == buck[idx].end())buck[idx].push_back(key);
     }
     
     void remove(int key) {
-        v[key] = false;
+        int idx = getIdx(key);
+        auto it = find(buck[idx].begin(), buck[idx].end(), key);
+        if(it !=  buck[idx].end())buck[idx].erase(it);
     }
     
     bool contains(int key) {
-        return v[key] == true; // if exists : return true , else return false
+        int idx = getIdx(key);
+        auto it = find(buck[idx].begin(), buck[idx].end(), key);
+        return it != buck[idx].end();
+        
     }
 };
 
