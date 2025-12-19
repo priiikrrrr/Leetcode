@@ -6,7 +6,7 @@ public:
             if(nums[j] == nums[j-1] + 1)sum+= nums[j];
             else break;
         }
-        set<int>st;
+        unordered_set<int>st;
         for(int &i : nums)st.insert(i);
         //starting from sum , what is the number , that doesnt exist in the nums
         while(st.count(sum) == 1)sum++;
