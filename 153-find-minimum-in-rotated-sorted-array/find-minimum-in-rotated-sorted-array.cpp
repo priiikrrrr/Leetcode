@@ -1,37 +1,24 @@
 class Solution {
 public:
     int findMin(vector<int>& nums) {
-        int bp = -1;
-
-        for (int i = 0; i < nums.size() - 1; i++) {
-            if (nums[i] > nums[i + 1])
-                bp = i;
-        }
-        if (bp == -1)
-            bp = 0;
-        int low = bp + 1;
+        int low = 0;
         int high = nums.size() - 1;
-        int minele = INT_MAX;
-        while (low <= high) {
-            int mid = low + (high - low) / 2;
-            if (nums[mid] < minele) {
-                minele = nums[mid];
-                high = mid - 1;
-            } else {
+        int ans = INT_MAX;
+        while(low <= high){
+            int mid = low + (high - low)/2;
+            if(nums[mid] >= nums[low]){
+                //left half is sorted
+                //compare the ans and pick the mini from low and ans
+                ans = min(ans , nums[low]);
                 low = mid + 1;
+            }else{
+                //if left half is unsorted , the right half must be sorted
+                //there we may pick the smallest ele from the sorted version
+                //which is from mid to high part , and there lowest will be nums[mid]
+                ans = min(ans , nums[mid]);
+                high =  mid - 1; 
             }
         }
-        low = 0;
-        high = bp;
-        while (low <= high) {
-            int mid = low + (high - low) / 2;
-            if (nums[mid] < minele) {
-                minele = nums[mid];
-                high = mid - 1;
-            } else {
-                low = mid + 1;
-            }
-        }
-        return minele;
+        return ans;
     }
 };
