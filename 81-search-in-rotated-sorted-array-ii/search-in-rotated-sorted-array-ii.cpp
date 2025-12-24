@@ -9,26 +9,34 @@ public:
             else
                 return false;
         }
-        int bp = - 1; 
-        for(int i = 0 ; i < nums.size() - 1; i++){
-            if(nums[i] > nums[i+1]) bp = i + 1;
-        }
-        if(bp == -1)bp = 0;
-        int low = bp;
+        int low = 0;
         int high = nums.size() - 1;
         while(low <= high){
             int mid = low + (high - low)/2;
             if(nums[mid] == target)return true;
-            else if(nums[mid] > target)high = mid - 1;
-            else low = mid + 1;
-        }
-        low = 0 ; 
-        high = bp;
-        while(low <= high){
-            int mid = low + (high - low)/2;
-            if(nums[mid] == target)return true;
-            else if(nums[mid] > target)high = mid - 1;
-            else low = mid + 1;
+            //if all three => low , mid , high are same we will shrink the search space  
+            if(nums[low] == nums[mid] && nums[mid] == nums[high]){
+                low = low+1;
+                high = high-1;
+                continue;
+            }
+            else if(nums[low] <= nums[mid]){
+                //the left part is sorted
+                //search the range of the left part 
+                if(nums[low] <= target && target <= nums[mid]){
+                    high = mid - 1;   
+                }else{
+                    low = mid + 1;
+                }
+            }else{
+                //the right part is sorted
+                //search the range of the right part
+                if(nums[mid] <= target && target<= nums[high]){
+                    low = mid + 1;
+                }else{
+                    high = mid - 1;
+                }
+            }
         }
         return false;
     }
