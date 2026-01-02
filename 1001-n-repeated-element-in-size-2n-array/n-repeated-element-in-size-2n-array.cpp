@@ -2,14 +2,12 @@ class Solution {
 public:
     int repeatedNTimes(vector<int>& nums) {
         int n = nums.size();
-        int repele = n/2;
-        int ans = 0;
+        int repele = n/2; //repeated ele occupy half of the array
 
-        unordered_map<int,int>mp;
-        for(int num : nums)mp[num]++;
-        for(auto n : mp){
-            if(n.second == repele)ans = n.first;
+        for(int i = 0 ; i < nums.size() - 2 ; i++){
+            if(nums[i] == nums[i+1] || nums[i] == nums[i+2])return nums[i];
         }
-        return ans;
+
+        return nums[nums.size() - 1];
     }
 };
