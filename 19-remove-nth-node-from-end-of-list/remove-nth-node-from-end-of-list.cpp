@@ -10,20 +10,24 @@
  */
 class Solution {
 public:
-    ListNode* removeNthFromEnd(ListNode* head, int idx){
+    ListNode* removeNthFromEnd(ListNode* head, int n) {
+        int len = 0;
         ListNode* temp = head;
-        int size = 0;
-        while(temp != NULL){
-            size++;
+        while(temp!= NULL){
+            len++;
             temp = temp->next;
         }
-        // if(size == 0) return NULL;
-        // else if(idx < 1 || idx > size)return temp;
-        // else if(idx == 1)return temp = temp->next;
-        if(size == idx)return head->next;
+        if(n == len){
+            head = head->next;
+            return head;
+        }
+        //nth from end == (len - n + 1)from start
+        int m = len - n + 1;
+        int idx = m - 1; //the index of node to be deleted 
         temp = head;
-        // for(int i = 0 ; i < (size - idx -1) ; i++)temp = temp->next;
-        for(int i = 1 ; i < size - idx ; i++)temp = temp->next;
+        for(int i = 1 ; i <= idx - 1; i++){
+            temp = temp->next;
+        }
         temp->next = temp->next->next;
         return head;
     }
