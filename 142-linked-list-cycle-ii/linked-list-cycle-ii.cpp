@@ -23,8 +23,8 @@ public:
                 break;
             }
         }
+        if(!flag)return NULL;
         slow = head;
-        if(fast == NULL || fast->next == NULL)return NULL;
         while(slow != fast){
             slow = slow->next;
             fast = fast->next;
