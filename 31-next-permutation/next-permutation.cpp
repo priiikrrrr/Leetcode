@@ -1,33 +1,27 @@
 class Solution {
 public:
     void nextPermutation(vector<int>& nums) {
-        // int i = nums[nums.length() - 1];
-        // int j = nums[nums.length() - 2];
-
-        // int j = -1;
-        int bp = -1;
-        // finding the break point
-        for (int i = nums.size() - 2; i >= 0; i--) {
-            if (nums[i] < nums[i + 1]) {
-                bp = i;
+        int n = nums.size();
+        int idx = -1;
+        for(int i = n - 1; i > 0 ; i--){
+            if(nums[i] > nums[i - 1]){
+                idx = i - 1;
                 break;
             }
         }
-        // if no breakpoint, simply aesc the order
-        if (bp == -1) {
-            reverse(nums.begin(), nums.end());
-            return;
-        }
-
-        // if bp found, sort the ele left, on the left of bp
-        reverse(nums.begin() + (bp + 1), nums.end());
-        
-        // Find the smallest element greater than nums[bp] from the end & swap
-        for (int i = bp + 1; i < nums.size(); i++) {
-            if (nums[i] > nums[bp]) {
-                swap(nums[bp], nums[i]);
-                break;
+        if(idx != -1){
+        int justbiggIdx = idx;
+            //find just greater index from the idx which satisfies the condition to the right of the it ;(i.e end se lekr idix tak mein jo bhi just greater ele hoga than the ele at idx we will flag that)
+            for(int i = n - 1; i >= idx + 1 ; i--){
+                if(nums[i] > nums[idx]){
+                    justbiggIdx = i;
+                    break;
+                }
             }
+        swap(nums[idx], nums[justbiggIdx]);
         }
+        //if the condition satisfies then reverse the rest of the ele from the justbiggidx till the end 
+        //if it doesnt satisfies the condition it means its already at its req pos simply rev all the ele to get the very next permutation
+        reverse(nums.begin() + idx + 1 , nums.end());
     }
 };
