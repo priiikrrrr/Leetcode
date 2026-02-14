@@ -1,20 +1,19 @@
 class Solution {
 public:
     int maxProfit(vector<int>& prices) {
-        int maxprofit = 0;
-        int stockStart = prices[0];
-        int currprofit = 0;
-        for(int i  = 1 ; i < prices.size() ; i++){
-            if(prices[i] > stockStart){
-                //current price is greater than the price stock was bought at 
-                // lets keep this as current profit ;
-                currprofit = prices[i] - stockStart;
-                
-                maxprofit = max(maxprofit , currprofit);
+        int maxp = 0;
+        int currp = 0;
+        int buystock = prices[0];
+        for(int i = 1 ; i < prices.size() ; i++){
+            if(prices[i] > buystock){
+//right day to sell the stock , given buy price is lesser than the upcoming day stock price
+                currp = abs(buystock - prices[i]);
+                maxp = max(maxp, currp);
             }
-            //the curr price is lesser than the stock we are at ;
-            else stockStart = prices[i];
+            //if the day we are at price is lesser than the stock we have bought
+            //signifies we couldve bought the stock on lower price hence , buying that one 
+            else buystock = prices[i];
         }
-        return maxprofit;
+        return maxp;
     }
 };
