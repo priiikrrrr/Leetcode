@@ -2,14 +2,16 @@ class Solution {
 public:
     bool isAnagram(string s, string t) {
         if(s.length() != t.length())return false;
-        vector<int>arr(26,0);
-        for(int i = 0 ; i < s.size() ; i++){
-            arr[s.at(i) - 'a']++;
-            arr[t.at(i) - 'a']--;
+        unordered_map<char,int>setOfAlpha;
+        for(auto str : s)setOfAlpha[str]++;
+        for(auto it  : t){
+            auto store = setOfAlpha.find(it);
+            if(store == setOfAlpha.end())return false;
+            store->second--;
+            if(store->second < 0)return false;
+            
         }
-        for(int j : arr){
-            if(j != 0)return false;
-        }
+
         return true;
     }
 };
