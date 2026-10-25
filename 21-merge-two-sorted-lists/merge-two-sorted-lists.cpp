@@ -10,18 +10,27 @@
  */
 class Solution {
 public:
-    ListNode* mergeTwoLists(ListNode* l1, ListNode* l2) {
-        if(l1 == NULL || l2 == NULL){
-            return l1 == NULL ? l2 : l1;
+    ListNode* mergeTwoLists(ListNode* list1, ListNode* list2) {
+        ListNode* dumm = new ListNode(0);
+        ListNode* temp = dumm;
+
+        while(list1 && list2){
+            //while neither of them is reached till the end 
+            if(list1->val > list2->val){
+                //append the list2 value to the merged list , and update the 
+                //pointer of list2
+                temp->next = list2;
+                list2 = list2->next;
+            }else{
+                temp->next = list1;
+                list1 = list1->next;
+            }
+            temp = temp->next;
         }
-        // if(l1 == NULL)return l2;
-        // if(l2 == NULL)return l1;
-        if(l1->val <= l2->val){
-            l1->next = mergeTwoLists(l1->next, l2);
-            return l1;
-        }else{
-            l2->next = mergeTwoLists(l1, l2->next);
-            return l2;
-        }
+
+        if(list1) temp->next = list1;
+        if(list2) temp->next = list2;
+
+        return dumm->next;
     }
 };
