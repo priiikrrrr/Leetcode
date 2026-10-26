@@ -1,30 +1,40 @@
 class Solution {
 public:
     int calPoints(vector<string>& operations) {
-        stack<int> record;
-        for (auto &i : operations) {
-            if (i == "+") {
-                int tp = record.top(); record.pop();
-                int st = record.top(); record.pop();
-                int res = tp + st;
-                record.push(st);
-                record.push(tp);
-                record.push(res);
-            } else if (i == "D") {
-                if (!record.empty()) {
-                    int ld = 2 * record.top();
-                    record.push(ld);
+        stack<int>st;
+        for(auto i : operations){
+            if( i == "C"){if(!st.empty())st.pop();}
+            else if( i == "D"){
+                if(!st.empty()){
+                int prev = st.top();
+                int doub = 2 * prev;
+                st.push(doub);
                 }
-            } else if (i == "C") {
-                if (!record.empty())record.pop();
-            } else
-                record.push(stoi(i)); // if the operation is numeric
+            }
+            else if( i == "+"){
+                if(!st.empty()){
+                int first = st.top();
+                st.pop();
+                int sec = st.top();
+                // st.pop();
+                int sum = first + sec;
+                // st.push(sec);
+                st.push(first);
+                st.push(sum);
+                }
+            }
+            else{
+                // i is a number 
+                int num = stoi(i);
+                st.push(num);
+            }
         }
-        int sum = 0;
-        while(!record.empty()){
-            sum += record.top();
-            record.pop();
+        int sumOfOp = 0;
+        while(!st.empty()){
+            sumOfOp += st.top();
+            st.pop();
         }
-        return sum;
+        return sumOfOp;
+        // return st.top();
     }
 };
